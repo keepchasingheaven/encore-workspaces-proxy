@@ -1,0 +1,28 @@
+# patterns para ignorar ao criar novos pacotes.
+#
+# isso suporta shell glob matching, matching de path relativo e negações (prefixadas com !).
+# apenas uma pattern por linha.
+
+.DS_Store
+
+# diretórios vcs comuns
+.git/
+.gitignore
+.bzr/
+.bzrignore
+.hg/
+.hgignore
+.svn/
+
+# arquivos de backup comuns
+*.swp
+*.bak
+*.tmp
+*.orig
+*~
+
+# variadas ides
+.project
+.idea/
+*.tmproj
+.vscode/
