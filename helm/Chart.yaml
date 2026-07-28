@@ -1,0 +1,6 @@
+apiVersion: v2
+name: encore-workspaces-proxy
+description: helm chart de proxy de workspaces do encore
+type: application
+version: 0.1.27
+appVersion: "0.25"
