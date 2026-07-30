@@ -1,0 +1,71 @@
+variables:
+	IMAGE_NAME: "github.com/keepchasingheaven/encore-workspaces-proxy"
+	CHART_NAME: "encore-workspaces-proxy"
+	GO_VERSION: "1.26.4"
+
+include:
+	- template: "Workflows/MergeRequest-Pipelines.encore-ci.yml"
+	- template: "Security/Secret-Detection.encore-ci.yml"
+	- template: "Security/Dependency-Scanning.encore-ci.yml"
+
+default:
+	tags:
+		- encore-docker
+	image: golang:${GO_VERSION}
+
+stages:
+	- test
+	- release
+
+.go-cache:
+	variables:
+		GOPATH: $CI_PROJECT_DIR/.go
+		GOLANGCI_LINT_CACHE: $CI_PROJECT_DIR/.golangci-lint
+	before_script:
+		- mkdir -p .go .golangci-lint
+	cache:
+		paths:
+			- .go/pkg/mod/
+			- .golangci-lint/
+
+lint:
+	extends: .go-cache
+	image: golangci/golangci-lint:v2.12.2-alpine
+	stage: test
+	script:
+		- golangci-lint --version
+		- golangci-lint run
+	artifacts:
+		reports:
+			codequality: nc-code-quality-report.json
+		paths:
+			- nc-code-quality-report.json
+
+run_tests:
+	stage: test
+	extends: .go-cache
+	parallel:
+		matrix:
+			- GO_VERSION ["1.26.4"]
+	script:
+		- make test
+	after_script:
+		- echo -e "\e[0Ksection_start:`date +%s`:coverage[collapsed=true]\r\e[0Krodando report de cobertura"
+		- make coverage
+		- echo -e "\e[0Ksection_end:`date +%s`:coverage\r\e[0K"
+	coverage: /^total:\t+\(statements\)\t+\d+\.\d+%$/
+	artifacts:
+		reports:
+			junit: coverage.xml
+
+publish_docker_image:
+	image: docker:29.2.1
+	services:
+		- docker:29.2.1-dind
+	stage: release
+	script:
+		- apk update
+		- apk add make bash
+		- USER="${CI_REGISTRY_USER}" TOKEN="${CI_REGISTRY_PASSWORD}" IMAGE_NAME="${IMAGE_NAME}" IMAGE_VERSION="${CI_COMMIT_TAG}" make docker-build-and-publish
+	rules:
+		- if: $CI_COMMIT_TAG
