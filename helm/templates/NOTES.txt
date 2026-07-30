@@ -1,0 +1,1 @@
+encore workspaces proxy foi instalado no cluster.
