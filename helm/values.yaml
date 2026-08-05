@@ -1,0 +1,117 @@
+replicaCount: 1
+
+port: 9876
+sshPort: 22
+
+image:
+  repository: github.com/keepchasingheaven/encore-workspaces-proxy
+  pullPolicy: IfNotPresent
+  tag: ""
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+podAnnotations: {}
+
+podSecurityContext: {}
+  # fsgroup: 2000
+
+securityContext: {}
+  # capabilities:
+  #   drop:
+  #   - all
+  # readonlyrootfilesystem: true
+  # runasnonroot: true
+  # runasuser: 1000
+
+service:
+  enabled: true
+  type: ClusterIP
+  port: 80
+  labels: {}
+  annotations: {}
+
+sshService:
+  enabled: true
+  type: LoadBalancer
+  loadBalancerIP: "" # deixar isso vazio para alocar um novo endereço ip
+  port: 22
+  labels: {}
+  annotations: {}
+
+ingress:
+  enabled: false
+  className: ""
+  annotations: {}
+  hosts:
+    - host: "workspaces.localdev.me"
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
+    - host: "*.workspaces.localdev.me"
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
+  tls:
+    - secretName: encore-workspace-proxy-tls
+      hosts:
+        - "workspaces.localdev.me"
+    - secretName: encore-workspace-proxy-wildcard-tls
+      hosts:
+        - "*workspaces.localdev.me"
+
+resources: {}
+  # limits:
+  #   cpu: 100m
+  #   memory: 128mi
+  # requests:
+  #   cpu: 100m
+  #   memory: 128mi
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 100
+  targetCPUUtilizationPercentage: 80
+  # targetmemoryutilizationpercentage: 80
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
+
+priorityClassName: ""
+
+runtimeClassName: ""
+
+configSecretName: encore-workspaces-proxy-config
+
+# watchnamespaces especifica os namespaces que o aplicativo deve assistir
+watchNamespaces: []
+
+rbac:
+  enabled: true
+
+# extraargs é utilizado para passar qualquer argumento adicional para o aplicativo
+extraArgs: []
+  # - <arg-name>=<arg-value>
+
+# volumemounts te permite especificar mounts de volumes adicionais para o aplicativo
+volumeMounts: []
+  # exemplo:
+  # - name: my-volume
+  #   mountpath: /mount/path
+
+# volumes te permite especificar volumes adicionais para o aplicativo
+volumes: []
+  # exemplo:
+  # - name: my-volume
+  #   persistentvolumeclaim:
+  #     claimname: my-pvc
+
+# labels te permite especificar labels adicionais para o aplicativo
+labels: {}
+  # exemplo:
+  # k8s.example.com/policy: "encore-workspaces-proxy"
