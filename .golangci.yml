@@ -1,0 +1,70 @@
+version: "2"
+run:
+  modules-download-mode: readonly
+linters:
+  enabled:
+    - bodyclose
+    - containedctx
+    - contextcheck
+    - cyclop
+    - decorder
+    - depguard
+    - errname
+    - exhaustive
+    - gochecknoglobals
+    - govet
+    - ineffassign
+    - loggercheck
+    - misspell
+    - nonamedreturns
+    - reassign
+    - staticcheck
+    - thelper
+    - unconvert
+    - unparam
+    - unused
+    - errcheck
+  settings:
+    depguard:
+      rules:
+        main:
+          allow:
+            - $gostd
+            - github.com/golang-jwt/jwt
+            - github.com/hasura/go-graphql-client
+            - github.com/prometheus/client_golang
+            - github.com/stretchr/testify
+            - k8s.io
+            - encore.com
+            - go.uber.org/zap
+            - go.uber.org/zap/zaptest
+            - golang.org/x/sync/errgroup
+            - golang.org/x/crypto/ssh
+          deny:
+            - pkg: github.com/sirupsen/logrus
+              desc: use zap
+            - pkg: github.com/keepchasingheaven/labkit/log
+              desc: use zap
+            - pkg: github.com/pkg/errors
+              desc: deve ser substituído pelo pacote de erros de biblioteca padrão
+  exclusions:
+    generated: lax
+    presets:
+      - comments
+      - common-false-positives
+      - legacy
+      - std-error-handling
+    paths:
+      - third_party$
+      - builtin$
+      - examples$
+formatters:
+  enable:
+    - gofumpt
+    - goimports
+  exclusions:
+    generated: lax
+    paths:
+      - third_party$
+      - builtin$
+      - examples$
