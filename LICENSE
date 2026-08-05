@@ -1,0 +1,44 @@
+the encore enterprise edition (ee) license (the “ee license”)
+copyright (c) 2026 encore b.v.
+
+with regard to the encore software:
+
+this software and associated documentation files (the "software") may only be
+used in production, if you (and any entity that you represent) have agreed to,
+and are in compliance with, the encore subscription terms of service, available
+at https://about.encore.com/terms/#subscription (the “ee terms”), or other
+agreement governing the use of the software, as agreed by you and encore,
+and otherwise have a valid encore enterprise Edition subscription for the
+correct number of user seats. subject to the foregoing sentence, you are free to
+modify this software and publish patches to the software. you agree that encore
+and/or its licensors (as applicable) retain all right, title and interest in and
+to all such modifications and/or patches, and all such modifications and/or
+patches may only be used, copied, modified, displayed, distributed, or otherwise
+exploited with a valid encore enterprise Edition subscription for the  correct
+number of user seats.  notwithstanding the foregoing, you may copy and modify
+the software for development and testing purposes, without requiring a
+subscription.  you agree that encore and/or its licensors (as applicable) retain
+all right, title and interest in and to all such modifications.  you are not
+granted any other rights beyond what is expressly stated herein.  subject to the
+foregoing, it is forbidden to copy, merge, publish, distribute, sublicense,
+and/or sell the software.
+
+this ee license applies only to the part of this software that is not
+distributed as part of encore community edition (ce). any part of this software
+distributed as part of encore ce or is served client-side as an image, font,
+cascading stylesheet (css), file which produces or is compiled, arranged,
+augmented, or combined into client-side javascript, in whole or in part, is
+copyrighted under the mit expat license. the full text of this ee license shall
+be included in all copies or substantial portions of the software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+for all third party components incorporated into the encore software, those
+components are licensed under the original license provided by the owner of the
+applicable component.
